@@ -1,11 +1,11 @@
 TARGET = first_sight
-BUILD_DIR = build
-DEVICE = gd32vf103cbt6
 
-include ../common/toolchain.mk
-include ../common/flag.mk
+include ../common/definition.mk
 
-AS_SRCS = $(DEVICE).S
+AS_SRCS = gd32vf103cbt6.S
+
+LDFLAGS += -T gd32vf103cbt6.ld
+
 AS_OBJS = $(addprefix $(BUILD_DIR)/, $(AS_SRCS:.S=.o))
 
 .PHONY: all clean
@@ -19,10 +19,11 @@ $(BUILD_DIR)/%.o: %.S
 	$(CC) $(ASFLAGS) -c $< -o $@
 
 $(TARGET).elf: $(AS_OBJS)
-	$(CC) $(LDFLAGS) -o $@ $^
+	$(CC) $(LDFLAGS) $^ -o $@
 	@$(SZ) $@
+	$(OC) -S -O binary $@ $(TARGET).bin
 
 clean:
-	rm -rf $(TARGET).elf $(AS_OBJS)
+	rm -rf $(TARGET).elf $(TARGET).bin $(AS_OBJS)
 
 include ../common/debug.mk
