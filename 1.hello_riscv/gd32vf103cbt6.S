@@ -9,5 +9,8 @@ _start:
 .type reset_handler, %function
 reset_handler:
     li a0, 0xdeadbeef
+
+    li a1, 0
     inf_loop:
+        addi a1, a1, 1
         j inf_loop

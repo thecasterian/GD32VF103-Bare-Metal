@@ -1,6 +1,7 @@
 INCLUDE_DIR = inc
 SOURCE_DIR = src
 BUILD_DIR = build
+OCD_CFG_DIR = ../openocd
 
 # Toolchain definitions.
 TOOLCHAIN = riscv32-unknown-elf
@@ -36,3 +37,8 @@ LDFLAGS += -nostartfiles
 LDFLAGS += -nostdlib
 LDFLAGS += -Wl,--no-relax
 LDFLAGS += -Wl,--gc-sections
+
+# For debug.
+OCD = riscv-openocd
+OCD_CFG = ft2232.cfg
+GDB_PORT = 3333

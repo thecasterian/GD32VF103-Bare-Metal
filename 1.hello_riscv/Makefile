@@ -1,4 +1,4 @@
-TARGET = first_sight
+TARGET = hello_riscv
 
 include ../common/definition.mk
 
@@ -8,7 +8,7 @@ LDFLAGS += -T gd32vf103cbt6.ld
 
 AS_OBJS = $(addprefix $(BUILD_DIR)/, $(AS_SRCS:.S=.o))
 
-.PHONY: all clean
+.PHONY: all clean ocd gdb
 
 all: $(BUILD_DIR) $(TARGET).elf
 
@@ -20,10 +20,14 @@ $(BUILD_DIR)/%.o: %.S
 
 $(TARGET).elf: $(AS_OBJS)
 	$(CC) $(LDFLAGS) $^ -o $@
-	@$(SZ) $@
 	$(OC) -S -O binary $@ $(TARGET).bin
+	@$(SZ) $@
 
 clean:
 	rm -rf $(TARGET).elf $(TARGET).bin $(AS_OBJS)
 
-include ../common/debug.mk
+ocd:
+	$(OCD) -f $(OCD_CFG_DIR)/$(OCD_CFG)
+
+gdb:
+	$(DB) -q $(TARGET).elf -ex "target remote :$(GDB_PORT)"
