@@ -1,9 +1,9 @@
-.section .init
+.section .start, "ax", %progbits
 
 _start:
+    /* Jump to reset_handler. */
     lui a0, %hi(reset_handler)
-    addi a0, a0, %lo(reset_handler)
-    jalr a0
+    jalr zero, %lo(reset_handler)(a0)
 
 .global reset_handler
 .type reset_handler, %function

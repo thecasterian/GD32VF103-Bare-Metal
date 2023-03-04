@@ -1,3 +1,4 @@
+# Directories.
 INCLUDE_DIR = inc
 SOURCE_DIR = src
 BUILD_DIR = build
@@ -27,6 +28,8 @@ CFLAGS += -g3
 CFLAGS += -std=gnu11
 CFLAGS += --specs=nano.specs
 CFLAGS += --specs=nosys.specs
+CFLAGS += -ffunction-sections
+CFLAGS += -fdata-sections
 CFLAGS += $(ARCH)
 
 # Linker flags.
@@ -34,8 +37,6 @@ LDFLAGS  = $(OPT)
 LDFLAGS += $(WRN)
 LDFLAGS += $(ARCH)
 LDFLAGS += -nostartfiles
-LDFLAGS += -nostdlib
-LDFLAGS += -Wl,--no-relax
 LDFLAGS += -Wl,--gc-sections
 
 # For debug.
