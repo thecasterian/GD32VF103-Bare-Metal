@@ -1,4 +1,4 @@
-TARGET = hello_riscv
+TARGET = hello_gd32vf103
 
 # Directories.
 BUILD_DIR = build
