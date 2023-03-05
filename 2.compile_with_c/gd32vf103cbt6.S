@@ -5,7 +5,7 @@ _start:
     lui a0, %hi(reset_handler)
     jalr zero, %lo(reset_handler)(a0)
 
-.global reset_handler
+.globl reset_handler
 .type reset_handler, %function
 reset_handler:
     /* Set global pointer. */
