@@ -57,7 +57,7 @@ all: $(BUILD_DIR) $(TARGET).elf
 $(BUILD_DIR):
 	mkdir -p $@
 
-$(BUILD_DIR)/%.o: %.S
+$(AS_OBJS): $(BUILD_DIR)/%.o: %.S
 	$(CC) $(ASFLAGS) -c $< -o $@
 
 $(TARGET).elf: $(AS_OBJS)
@@ -71,5 +71,5 @@ clean:
 ocd:
 	$(OCD) -f $(OCD_CFG_DIR)/$(OCD_CFG)
 
-gdb:
+gdb: $(TARGET).elf
 	$(DB) -q $(TARGET).elf -ex "target remote :$(GDB_PORT)"

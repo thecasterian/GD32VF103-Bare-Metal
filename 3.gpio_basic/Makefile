@@ -1,7 +1,9 @@
-TARGET = compile_with_c
+TARGET = gpio_basic
 
 # Directories.
 BUILD_DIR = build
+LIB_INCLUDE_DIR = ../common/inc
+LIB_SOURCE_DIR = ../common/src
 OCD_CFG_DIR = ../openocd
 
 # Toolchain definitions.
@@ -31,6 +33,7 @@ CFLAGS += --specs=nosys.specs
 CFLAGS += -ffunction-sections
 CFLAGS += -fdata-sections
 CFLAGS += $(ARCH)
+CFLAGS += -I$(LIB_INCLUDE_DIR)
 
 # Linker flags.
 LDFLAGS  = $(OPT)
@@ -47,10 +50,12 @@ GDB_PORT = 3333
 
 # Source files.
 AS_SRCS = gd32vf103cbt6.S
-C_SRCS = main.c
+C_SRCS = $(wildcard *.c)
+LIB_C_SRCS = $(wildcard $(LIB_SOURCE_DIR)/*.c)
 
 AS_OBJS = $(addprefix $(BUILD_DIR)/, $(AS_SRCS:.S=.o))
-C_OBJS = $(addprefix $(BUILD_DIR)/, $(C_SRCS:.c=.o))
+C_OBJS = $(addprefix $(BUILD_DIR)/, $(notdir $(C_SRCS:.c=.o)))
+LIB_C_OBJS = $(addprefix $(BUILD_DIR)/, $(notdir $(LIB_C_SRCS:.c=.o)))
 
 .PHONY: all clean ocd gdb
 
@@ -65,13 +70,16 @@ $(AS_OBJS): $(BUILD_DIR)/%.o: %.S
 $(C_OBJS): $(BUILD_DIR)/%.o: %.c
 	$(CC) $(CFLAGS) -c $< -o $@
 
-$(TARGET).elf: $(AS_OBJS) $(C_OBJS)
+$(LIB_C_OBJS): $(BUILD_DIR)/%.o: $(LIB_SOURCE_DIR)/%.c
+	$(CC) $(CFLAGS) -c $< -o $@
+
+$(TARGET).elf: $(AS_OBJS) $(C_OBJS) $(LIB_C_OBJS)
 	$(CC) $(LDFLAGS) $^ -o $@
 	$(OC) -S -O binary $@ $(TARGET).bin
 	@$(SZ) $@
 
 clean:
-	rm -rf $(TARGET).elf $(TARGET).bin $(AS_OBJS) $(C_OBJS)
+	rm -rf $(TARGET).elf $(TARGET).bin $(AS_OBJS) $(C_OBJS) $(LIB_C_OBJS)
 
 ocd:
 	$(OCD) -f $(OCD_CFG_DIR)/$(OCD_CFG)
