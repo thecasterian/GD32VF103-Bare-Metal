@@ -39,19 +39,12 @@ SECTIONS
     {
         _sdata = .;
 
-        *(.rdata)
         *(.data .data.*)
 
         . = ALIGN(8);
         PROVIDE(__global_pointer$ = . + 0x800);
 
         *(.sdata .sdata.*)
-
-        . = ALIGN(8);
-        *(.srodata.cst16)
-        *(.srodata.cst8)
-        *(.srodata.cst4)
-        *(.srodata.cst2)
         *(.srodata .srodata.*)
 
         . = ALIGN(4);

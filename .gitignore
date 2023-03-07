@@ -2,3 +2,6 @@
 *.o
 *.elf
 *.bin
+
+# IDE configuration.
+.vscode/
