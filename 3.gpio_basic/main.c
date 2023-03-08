@@ -5,7 +5,7 @@
 /* Green: A1. */
 /* Blue: A2. */
 
-#define DELAY_COUNT (1000000UL)
+#define DELAY_COUNT (1000000U)
 
 static void delay(uint32_t count);
 
@@ -15,9 +15,9 @@ int main(void) {
 
     /* Output, max speed 50 MHz, push-pull. */
     GPIOC->CTL1 &= ~(GPIO_CTL1_MD13 | GPIO_CTL1_CTL13);
-    GPIOC->CTL1 |= ((0x3UL << GPIO_CTL1_MD13_Pos));
+    GPIOC->CTL1 |= (0x3U << GPIO_CTL1_MD13_Pos);
     GPIOA->CTL0 &= ~(GPIO_CTL0_MD1 | GPIO_CTL0_CTL1 | GPIO_CTL0_MD2 | GPIO_CTL0_CTL2);
-    GPIOA->CTL0 |= ((0x3UL << GPIO_CTL0_MD1_Pos) | (0x3UL << GPIO_CTL0_MD2_Pos));
+    GPIOA->CTL0 |= ((0x3U << GPIO_CTL0_MD1_Pos) | (0x3U << GPIO_CTL0_MD2_Pos));
 
     /* Turn off all LEDs. */
     GPIOC->BOP = GPIO_BOP_BOP13;
@@ -46,7 +46,7 @@ int main(void) {
 }
 
 static void delay(uint32_t count) {
-    for (uint32_t i = 0UL; i < count; i++) {
+    for (uint32_t i = 0U; i < count; i++) {
         __asm__("nop");
     }
 }
