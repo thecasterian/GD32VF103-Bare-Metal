@@ -8,17 +8,6 @@
 static void delay(uint32_t count);
 
 int main(void) {
-    /* Enable HXTAL. */
-    RCU->CTL |= RCU_CTL_HXTALEN;
-    while ((RCU->CTL & RCU_CTL_HXTALSTB) == 0U) {}
-
-    /* AHB prescaler = 1. */
-    RCU->CFG0 |= (0U << RCU_CFG0_AHBPSC_Pos);
-    /* APB1 prescaler = 2. */
-    RCU->CFG0 |= (4U << RCU_CFG0_APB1PSC_Pos);
-    /* APB2 prescaler = 1. */
-    RCU->CFG0 |= (0U << RCU_CFG0_APB2PSC_Pos);
-
     /* PLL multiplier = 27. */
     RCU->CFG0 |= ((10U << RCU_CFG0_PLLMF_Pos) | (1U << RCU_CFG0_PLLMF_4_Pos));
     /* PLL source = PREDV0. */
@@ -28,6 +17,17 @@ int main(void) {
     RCU->CFG1 |= (1U << RCU_CFG1_PREDV0_Pos);
     /* PREDV0 source = HXTAL. */
     RCU->CFG1 |= (0U << RCU_CFG1_PREDV0SEL_Pos);
+
+    /* AHB prescaler = 1. */
+    RCU->CFG0 |= (0U << RCU_CFG0_AHBPSC_Pos);
+    /* APB1 prescaler = 2. */
+    RCU->CFG0 |= (4U << RCU_CFG0_APB1PSC_Pos);
+    /* APB2 prescaler = 1. */
+    RCU->CFG0 |= (0U << RCU_CFG0_APB2PSC_Pos);
+
+    /* Enable HXTAL. */
+    RCU->CTL |= RCU_CTL_HXTALEN;
+    while ((RCU->CTL & RCU_CTL_HXTALSTB) == 0U) {}
 
     /* Enable PLL. */
     RCU->CTL |= RCU_CTL_PLLEN;
