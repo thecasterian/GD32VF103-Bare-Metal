@@ -24,6 +24,8 @@ int main(void) {
     RCU->CFG0 |= (4U << RCU_CFG0_APB1PSC_Pos);
     /* APB2 prescaler = 1. */
     RCU->CFG0 |= (0U << RCU_CFG0_APB2PSC_Pos);
+    /* ADC prescaler = 8. */
+    RCU->CFG1 |= (3U << RCU_CFG0_ADCPSC_Pos);
 
     /* Enable HXTAL. */
     RCU->CTL |= RCU_CTL_HXTALEN;
