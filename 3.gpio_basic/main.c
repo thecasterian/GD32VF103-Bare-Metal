@@ -1,4 +1,3 @@
-#include <stdbool.h>
 #include "gd32vf103.h"
 
 /* Red: C13. */

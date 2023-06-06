@@ -21,10 +21,10 @@ typedef struct {
 
 #define GPIO_CTL0_MD0_Pos               (0U)
 #define GPIO_CTL0_MD0_Msk               (0x3UL << GPIO_CTL0_MD0_Pos)
-#define GPIO_CTL0_MD0                   GPIO_CTL0_MD0_Msk                       /* Port 0 mode bits. */
+#define GPIO_CTL0_MD0                   GPIO_CTL0_MD0_Msk
 #define GPIO_CTL0_CTL0_Pos              (2U)
 #define GPIO_CTL0_CTL0_Msk              (0x3UL << GPIO_CTL0_CTL0_Pos)
-#define GPIO_CTL0_CTL0                  GPIO_CTL0_CTL0_Msk                      /* Port 0 configuration bits. */
+#define GPIO_CTL0_CTL0                  GPIO_CTL0_CTL0_Msk
 #define GPIO_CTL0_MD1_Pos               (4U)
 #define GPIO_CTL0_MD1_Msk               (0x3UL << GPIO_CTL0_MD1_Pos)
 #define GPIO_CTL0_MD1                   GPIO_CTL0_MD1_Msk
