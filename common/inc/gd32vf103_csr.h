@@ -55,4 +55,22 @@
 #define CSR_TXEVT                       0x812
 #define CSR_WFE                         0x810
 
+#define READ_CSR(reg) READ_CSR_(reg)
+#define WRITE_CSR(reg, val) WRITE_CSR_(reg, val)
+#define SET_CSR(reg, bits) SET_CSR_(reg, bits)
+#define CLEAR_CSR(reg, bits) CLEAR_CSR_(reg, bits)
+
+#define READ_CSR_(reg) \
+({ \
+    uint32_t val; \
+    __asm__ volatile ("csrr %0, " #reg : "=r"(val)); \
+    val; \
+})
+#define WRITE_CSR_(reg, val) \
+    __asm__ volatile ("csrw " #reg ", %0" :: "r"(val))
+#define SET_CSR_(reg, bits) \
+    __asm__ volatile ("csrs " #reg ", %0" :: "r"(bits))
+#define CLEAR_CSR_(reg, bits) \
+    __asm__ volatile ("csrc " #reg ", %0" :: "r"(bits))
+
 #endif
