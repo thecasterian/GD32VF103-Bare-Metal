@@ -13,7 +13,7 @@ DB = $(TOOLCHAIN)-gdb
 
 OPT = -O0
 WRN = -Wall -Wextra
-ARCH = -march=rv32imac -mabi=ilp32 -mcmodel=medlow
+ARCH = -march=rv32imac_zicsr -mabi=ilp32 -mcmodel=medlow
 
 # Assembler flags.
 ASFLAGS  = $(OPT)

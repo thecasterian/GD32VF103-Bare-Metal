@@ -1,4 +1,4 @@
-TARGET = eclic_timer_interrupt
+TARGET = eclic_systick_interrupt
 
 # Directories.
 BUILD_DIR = build
