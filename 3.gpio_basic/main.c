@@ -14,7 +14,7 @@ int main(void) {
 
     /* Output, max speed 50 MHz, push-pull. */
     GPIOC->CTL1 &= ~(GPIO_CTL1_MD13 | GPIO_CTL1_CTL13);
-    GPIOC->CTL1 |= ((0x3UL << GPIO_CTL1_MD13_Pos));
+    GPIOC->CTL1 |= (0x3UL << GPIO_CTL1_MD13_Pos);
     GPIOA->CTL0 &= ~(GPIO_CTL0_MD1 | GPIO_CTL0_CTL1 | GPIO_CTL0_MD2 | GPIO_CTL0_CTL2);
     GPIOA->CTL0 |= ((0x3UL << GPIO_CTL0_MD1_Pos) | (0x3UL << GPIO_CTL0_MD2_Pos));
 

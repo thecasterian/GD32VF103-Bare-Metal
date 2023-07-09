@@ -4,13 +4,13 @@
 #include <stdint.h>
 
 typedef struct {
-    volatile uint32_t EC;
-    volatile uint32_t PCF0;
-    volatile uint32_t EXTISS0;
-    volatile uint32_t EXTISS1;
-    volatile uint32_t EXTISS2;
-    volatile uint32_t EXTISS3;
-    volatile uint32_t PCF1;
+    volatile uint32_t EC;               /* Event control register,              Address offset: 0x00. */
+    volatile uint32_t PCF0;             /* AFIO port configuration register 0,  Address offset: 0x04. */
+    volatile uint32_t EXTISS0;          /* EXTI sources selection register 0,   Address offset: 0x08. */
+    volatile uint32_t EXTISS1;          /* EXTI sources selection register 1,   Address offset: 0x0C. */
+    volatile uint32_t EXTISS2;          /* EXTI sources selection register 2,   Address offset: 0x10. */
+    volatile uint32_t EXTISS3;          /* EXTI sources selection register 3,   Address offset: 0x14. */
+    volatile uint32_t PCF1;             /* AFIO port configuration register 1,  Address offset: 0x1C. */
 } AFIO_TypeDef;
 
 #define AFIO ((AFIO_TypeDef *)0x40010000)
