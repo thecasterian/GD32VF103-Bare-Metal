@@ -56,6 +56,8 @@ static void send_string(const char *s) {
         send_byte(*ptr);
         ptr++;
     }
+    /* Wait for TC to be asserted. */
+    while (!(USART0->STAT & USART_STAT_TC)) {}
 }
 
 static void delay(uint32_t count) {
