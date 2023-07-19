@@ -81,3 +81,6 @@ ocd:
 
 gdb: $(TARGET).elf
 	$(DB) -q $(TARGET).elf -ex "target remote :$(GDB_PORT)"
+
+flash: $(TARGET).elf
+	$(OCD) -f $(OCD_CFG_DIR)/$(OCD_CFG) -c init -c "flash protect 0 0 last off; program {$(TARGET).elf} verify; exit 0;"
